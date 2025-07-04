@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from v1.sink import sink_pb2 as v1_dot_sink_dot_sink__pb2
+from dataflow_sdk.libs.sink import sink_pb2 as v1_dot_sink_dot_sink__pb2
 
 GRPC_GENERATED_VERSION = '1.73.1'
 GRPC_VERSION = grpc.__version__

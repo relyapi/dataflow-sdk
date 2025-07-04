@@ -1,9 +1,7 @@
-from bycrawler import save_item
-from bycrawler.biyao.entity.result import Result
-from bycrawler.utils import calculate_md5
+from dataflow_sdk.entity.result import Result, save_item
 
 
-class DatdPipeline:
+class DataFlowPipeline:
     def process_item(self, item, spider):
         """
         task_id和task_name必须有一个
@@ -18,5 +16,5 @@ class DatdPipeline:
         """
         result = Result(item)
         result.set_sink_name(spider.name)
-        save_item(calculate_md5(spider.name), result)
+        save_item(spider.name, result)
         return item

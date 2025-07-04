@@ -3,17 +3,16 @@ from typing import List, Optional, Dict
 
 from loguru import logger
 
-from bycrawler.biyao.crawler.flow.data_pb2 import SinkType
-from bycrawler.biyao.crawler.flow.message_pb2 import DoSinkRequest, DoVerifyRequest
-from bycrawler.biyao.crawler.flow.service_pb2_grpc import DataHubStub
-from bycrawler.biyao.entity.client import Client, get_client
+from dataflow_sdk.entity.client import Client, get_client
+from dataflow_sdk.libs.sink.sink_pb2 import SinkType, DoSinkRequest
+from dataflow_sdk.libs.sink.sink_pb2_grpc import DataHubStub
 
 
 class Result(dict):
     """
-    _task_id: 任务id
-    _task_name: 任务名称
-    _task_type: 任务类型 list/detail
+    _sink_id: 任务id
+    _sink_name: 任务名称
+    _sink_type: 任务类型 insert、update、log
     """
 
     def get_sink_id(self) -> str:
@@ -74,10 +73,11 @@ class ResultService:
         if self.is_verify:
             return True
         try:
-            result = self.sink_stub.DoVerify(DoVerifyRequest(
-                sinkId=str(sink_id)
-            ))
-            logger.info(f'sink_id verify success: {result}')
+            # 是否验证
+            # result = self.sink_stub.DoVerify(DoVerifyRequest(
+            #     sinkId=str(sink_id)
+            # ))
+            # logger.info(f'sink_id verify success: {result}')
             self.is_verify = True
             return True
         except Exception as e:

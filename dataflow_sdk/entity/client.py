@@ -3,8 +3,8 @@ from typing import Optional
 
 import grpc
 
-from bycrawler.biyao.crawler.flow.service_pb2_grpc import DataHubStub
-from bycrawler.biyao.entity.address import Address, new_address_from_string
+from dataflow_sdk.entity.address import Address, new_address_from_string
+from dataflow_sdk.libs.sink.sink_pb2_grpc import DataHubStub
 
 
 class Client:
@@ -22,11 +22,11 @@ class Client:
 
     def __init__(self):
         try:
-            self.address = new_address_from_string(os.getenv('BIYAO_FLOW_GRPC_ADDRESS', "10.6.16.232:31792"))
+            self.address = new_address_from_string(os.getenv('DATA_FLOW_GRPC_ADDRESS', "127.0.0.1:9000"))
         except Exception:
             self.address = Address(
-                host=os.getenv('BIYAO_FLOW_GRPC_ADDRESS_HOST'),
-                port=os.getenv('BIYAO_FLOW_GRPC_ADDRESS_PORT'),
+                host=os.getenv('DATA_FLOW_GRPC_ADDRESS_HOST'),
+                port=os.getenv('DATA_FLOW_GRPC_ADDRESS_PORT'),
             )
         addr = self.address.string()
         self.channel = grpc.insecure_channel(addr)
