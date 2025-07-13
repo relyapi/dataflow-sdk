@@ -27,16 +27,14 @@ class DoItemRequest(_message.Message):
     def __init__(self, sinkId: _Optional[str] = ..., sinkType: _Optional[_Union[SinkType, str]] = ..., data: _Optional[_Union[_any_pb2.Any, _Mapping]] = ...) -> None: ...
 
 class DoSinkRequest(_message.Message):
-    __slots__ = ("sinkId", "sinkType", "templateId", "data")
+    __slots__ = ("sinkId", "sinkType", "data")
     SINKID_FIELD_NUMBER: _ClassVar[int]
     SINKTYPE_FIELD_NUMBER: _ClassVar[int]
-    TEMPLATEID_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
     sinkId: str
     sinkType: SinkType
-    templateId: int
     data: bytes
-    def __init__(self, sinkId: _Optional[str] = ..., sinkType: _Optional[_Union[SinkType, str]] = ..., templateId: _Optional[int] = ..., data: _Optional[bytes] = ...) -> None: ...
+    def __init__(self, sinkId: _Optional[str] = ..., sinkType: _Optional[_Union[SinkType, str]] = ..., data: _Optional[bytes] = ...) -> None: ...
 
 class Response(_message.Message):
     __slots__ = ("status",)

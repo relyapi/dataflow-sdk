@@ -1,12 +1,20 @@
 from datetime import datetime
 
-from dataflow_sdk import save_items
+from dataflow_sdk import save_items, Record, Metadata
 
-result = [{
+result = {
     'name': 'xiaoming',
     "age": 25,
     "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
     "hello": "world",
     "world": 1121211
-}] * 10
-save_items('95b74bd2-c3a3-4ded-9248-4dc623a01e69', result)
+}
+
+
+
+records = [Record(
+    item=result,
+    metadata=Metadata(url=f"https://www.json.cn{x}/"),
+) for x in range(10)]
+
+save_items('77963b7a931377ad4ab5ad6a9cd718aa', records)

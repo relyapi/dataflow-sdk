@@ -2,7 +2,7 @@ import os
 
 from loguru import logger
 
-from dataflow_sdk.entity.result import Result, save_item
+from dataflow_sdk.entity.result import  save_item
 
 
 class DataFlowPipeline:
@@ -20,9 +20,9 @@ class DataFlowPipeline:
         """
         try:
             DATAFLOW_SINK_ID = os.environ["DATAFLOW_SINK_ID"]
-            result = Result(item)
-            result.set_sink_name(spider.name)
-            save_item(DATAFLOW_SINK_ID, result)
+            # result = Result(item)
+            # result.set_sink_name(spider.name)
+            # save_item(DATAFLOW_SINK_ID, result)
             return item
         except Exception as e:
             logger.error("未配置DATAFLOW_SINK_ID环境变量")
