@@ -6,6 +6,9 @@
 *.dylib
 
 .idea/
+
+**/__pycache__/
+
 dist/
 
 # Test binary, built with `go test -c`
