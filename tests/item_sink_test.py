@@ -10,8 +10,6 @@ result = {
     "world": 1121211
 }
 
-
-
 records = [Record(
     item=result,
     metadata=Metadata(url=f"https://www.json.cn{x}/"),

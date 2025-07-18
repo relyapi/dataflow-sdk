@@ -5,6 +5,8 @@ import grpc
 
 from dataflow_sdk.libs.sink.sink_pb2_grpc import DataHubStub
 
+DATAFLOW_GRPC_ADDRESS = os.getenv('DATAFLOW_GRPC_ADDRESS', "127.0.0.1:9000")
+
 
 class Client:
     # settings
@@ -16,10 +18,7 @@ class Client:
     # dependencies
     data_hub_stub: DataHubStub = None
 
-    # plugin_client: Plugin = None
-
     def __init__(self):
-        DATAFLOW_GRPC_ADDRESS = os.getenv('DATAFLOW_GRPC_ADDRESS', "127.0.0.1:9000")
         self.channel = grpc.insecure_channel(DATAFLOW_GRPC_ADDRESS)
         self._register()
 
