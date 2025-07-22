@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from dataflow_sdk import save_items, Record, Metadata
+from dataflow_sdk import save_items, Record
 
 result = {
     'name': 'xiaoming',
@@ -11,8 +11,9 @@ result = {
 }
 
 records = [Record(
-    item=result,
-    metadata=Metadata(url=f"https://www.json.cn{x}/"),
-) for x in range(10)]
+    store_key=f"https://www.json.cn{x}/",
+    data=result,
+    metadata={"name": "gage"},
+) for x in range(110)]
 
 save_items('77963b7a931377ad4ab5ad6a9cd718aa', records)

@@ -1,15 +1,13 @@
 from datetime import datetime
-from typing import Optional, Dict, Any, List, Union
+from typing import Optional, Any, Dict
 
-from pydantic import BaseModel
-
-
-class Metadata(BaseModel):
-    source: Optional[str] = ''
-    url: Optional[str] = ''
-    crawl_time: Optional[str] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+from pydantic import BaseModel, Field
 
 
 class Record(BaseModel):
-    item: Union[Dict[str, Any], List[Dict[str, Any]]]
-    metadata: Optional[Metadata] = None
+    store_key: Optional[str] = Field(default='')
+    crawl_time: Optional[str] = Field(
+        default_factory=lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    )
+    data: Optional[Any]
+    metadata: Optional[Dict[str, Any]] = Field(default=None)
