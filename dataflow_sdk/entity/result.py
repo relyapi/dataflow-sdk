@@ -1,6 +1,6 @@
-import json
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict
 
+import orjson
 from loguru import logger
 
 from dataflow_sdk.entity.client import Client, get_client
@@ -39,7 +39,7 @@ class ResultService:
 
     def _send(self, items: List[Dict]):
         """将一批记录打包为 DoSinkRequest 发出"""
-        data = json.dumps(items, ensure_ascii=False).encode('utf-8')
+        data = orjson.dumps(items)
         request = DoSinkRequest(
             sinkId=self.sink_id,
             data=data,

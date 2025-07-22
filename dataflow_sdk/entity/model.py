@@ -1,9 +1,15 @@
 from datetime import datetime
+from enum import Enum
 from typing import Optional, Any, Dict
 
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field
 
-from dataflow_sdk.libs.sink.sink_pb2 import SinkType
+
+class SinkType(Enum):
+    RAW = 0  # 日志、列表等原始数据
+    ITEM = 1  # 清洗好的数据
+    COMMENT = 2  # 评论数据
+    PROFILE = 3  # 用户
 
 
 class Record(BaseModel):
@@ -15,5 +21,3 @@ class Record(BaseModel):
     )
     data: Optional[Any]
     metadata: Optional[Dict[str, Any]] = Field(default=None)
-
-    model_config = ConfigDict(arbitrary_types_allowed=True)
