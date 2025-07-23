@@ -13,8 +13,8 @@ class SinkType(Enum):
 
 
 class Record(BaseModel):
-    parent_url: str = Field(description='parent url')
-    sink_type: SinkType = Field(description='sink type')
+    parent_url: str = Field(default=None, description='parent url')
+    sink_type: SinkType = Field(default=SinkType.ITEM, description='sink type')
     store_key: Optional[str] = Field(default='')
     crawl_time: Optional[str] = Field(
         default_factory=lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S")
