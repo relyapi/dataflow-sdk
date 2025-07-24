@@ -12,9 +12,8 @@ result = {
 }
 
 records = [Record(
-    parent_url="https://www.json.cn",
+    request_url=f"https://add.weee.tsinghua.edu.cn/{x}",
     sink_type=SinkType.ITEM,
-    store_key=f"https://www.json.cn{x}/",
     data=result,
     metadata={"name": "gage"},
 ) for x in range(10)]
