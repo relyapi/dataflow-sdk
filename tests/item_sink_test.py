@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from dataflow_sdk import save_items, Record
-from dataflow_sdk.entity.model import SinkType
+from dataflow_sdk.entity.model import CrawlType
 
 result = {
     'name': 'xiaoming',
@@ -12,9 +12,8 @@ result = {
 }
 
 records = [Record(
-    parent_url="https://www.json.cn",
-    sink_type=SinkType.ITEM,
-    store_key=f"https://www.json.cn{x}/",
+    crawl_url=f"https://add.weee.tsinghua.edu.cn/{x}",
+    crawl_type=CrawlType.ITEM,
     data=result,
     metadata={"name": "gage"},
 ) for x in range(10)]

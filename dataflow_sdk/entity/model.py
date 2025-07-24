@@ -5,17 +5,25 @@ from typing import Optional, Any, Dict
 from pydantic import BaseModel, Field
 
 
-class SinkType(Enum):
-    RAW = 0  # 日志、列表等原始数据
-    ITEM = 1  # 清洗好的数据
-    COMMENT = 2  # 评论数据
-    PROFILE = 3  # 用户
+class CrawlSource(Enum):
+    PC = 0
+    ANDROID = 1
+    MINI = 2
+    IOS = 3
+
+
+class CrawlType(Enum):
+    ITEM = 0  # 清洗好的数据
+    LIST = 1  # 列表数据
+    LOG = 2  # 日志数据
+    COMMENT = 3  # 评论数据
+    PROFILE = 4  # 用户
 
 
 class Record(BaseModel):
-    parent_url: str = Field(default=None, description='parent url')
-    sink_type: SinkType = Field(default=SinkType.ITEM, description='sink type')
-    store_key: Optional[str] = Field(default='')
+    crawl_source: CrawlSource = Field(default=CrawlSource.PC, description='crawl source')
+    crawl_type: CrawlType = Field(default=CrawlType.ITEM, description='crawl type')
+    crawl_url: str = Field(default=None, description='crawl url')
     crawl_time: Optional[str] = Field(
         default_factory=lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     )
