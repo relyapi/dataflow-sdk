@@ -5,7 +5,7 @@ import grpc
 
 from dataflow_sdk.libs.sink.sink_pb2_grpc import DataHubStub
 
-DATAFLOW_GRPC_ADDRESS = os.getenv('DATAFLOW_GRPC_ADDRESS', "127.0.0.1:9000")
+DATAFLOW_GRPC_ADDRESS = os.getenv('DATAFLOW_GRPC_ADDRESS', "dataflow.relyapi.com")
 
 
 class Client:
@@ -19,7 +19,7 @@ class Client:
     data_hub_stub: DataHubStub = None
 
     def __init__(self):
-        self.channel = grpc.insecure_channel(DATAFLOW_GRPC_ADDRESS)
+        self.channel = grpc.secure_channel(DATAFLOW_GRPC_ADDRESS, grpc.ssl_channel_credentials())
         self._register()
 
     def _register(self):
